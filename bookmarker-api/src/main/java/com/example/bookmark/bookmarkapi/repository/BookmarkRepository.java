@@ -13,5 +13,11 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
 
     //Spring JPA Projection
     @Query("select new com.example.bookmark.bookmarkapi.dto.BookmarkDTO(b.id, b. title, b.url, b.createdAt) from Bookmark b")
-    Page<BookmarkDTO> findBookmarks(Pageable  pageable);
+    Page<BookmarkDTO> findBookmarks(Pageable pageable);
+
+    @Query(" select new com.example.bookmark.bookmarkapi.dto.BookmarkDTO(b.id, b.title, b.url, b.createdAt) " +
+            "from Bookmark b where lower(b.title) like lower(concat('%', :query, '%'))")
+    Page<BookmarkDTO> searchBookmarks(Pageable pageable, String query);
+
+    Page<BookmarkDTO> findByTitleContainsIgnoreCase(Pageable pageable, String query);
 }
