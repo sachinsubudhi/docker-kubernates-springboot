@@ -11,7 +11,7 @@ public class BookmarkMapper {
     public BookmarkDTO toDto(Bookmark bookmark) {
         return new BookmarkDTO(bookmark.getId(),
                 bookmark.getTitle(),
-                bookmark.getTitle(),
+                bookmark.getUrl(),
                 bookmark.getCreatedAt());
     }
 }

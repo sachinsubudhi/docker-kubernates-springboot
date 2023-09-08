@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/api/bookmarks")
@@ -19,7 +20,7 @@ public class BookmarkController {
     @GetMapping
     public BookmarksDTO getBookmarks(@RequestParam(name = "page", defaultValue = "1") Integer page,
                                      @RequestParam(name = "query", required = false) String query) {
-        if (query == null || query.trim().length() == 0) {
+        if (query == null || query.trim().isEmpty()) {
             return bookmarkService.getBookmarks(page);
         }
         return bookmarkService.searchBookmarks(page, query);
@@ -29,5 +30,10 @@ public class BookmarkController {
     @ResponseStatus(HttpStatus.CREATED)
     public BookmarkDTO createBookmark(@RequestBody @Valid CreateBookmarkRequest createBookmarkRequest) {
         return bookmarkService.createBookmark(createBookmarkRequest);
+    }
+
+    @GetMapping("/{id}")
+    public BookmarkDTO getBookmarkById(@PathVariable("id") Long id) {
+        return bookmarkService.geyBookmarkById(id);
     }
 }

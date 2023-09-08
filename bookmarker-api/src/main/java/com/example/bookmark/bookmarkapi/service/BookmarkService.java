@@ -46,4 +46,9 @@ public class BookmarkService {
 
         return bookmarkMapper.toDto(savedBookmark);
     }
+
+    @Transactional(readOnly = true)
+    public BookmarkDTO geyBookmarkById(Long id) {
+        return bookmarkMapper.toDto(bookmarkRepository.findById(id).orElseThrow());
+    }
 }
