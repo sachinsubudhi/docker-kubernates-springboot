@@ -134,6 +134,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>docker-kubernetes-springboot</finalName>
 	</build>
 
 </project>
